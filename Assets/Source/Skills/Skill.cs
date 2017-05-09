@@ -73,6 +73,9 @@ namespace Skills
 		
 		// Super Attacks (4 command chains)
 		SHORYUKEN,
+
+		// Super Attacks (4 command chains)
+		ATTACK_DAS_CORUJA,
 		
 		// Ultra Attacks (5 command chains)
 		SHINKU_HADOUKEN

@@ -9,10 +9,23 @@ using Characters;
 
 public class GameManager
 {
+	private static GameController _controller;
+
+	public static GameController Controller
+	{
+		get
+		{
+			if (_controller == null)
+				_controller = GameObject.Find("GameController").GetComponent<GameController>();
+
+			return _controller;
+		}
+	}
+
 	private static GameObject mainPlayerGO;
 	private static Characters.CharacterController mainPlayer;
 
-	public static float GameTime {get { return 0; } }
+	public static float GameTime {get { return Controller.GameTime; } }
 	
 	public static GameObject MainPlayerGO
 	{
@@ -30,7 +43,7 @@ public class GameManager
 		get
 		{
 			if (mainPlayer == null)
-				mainPlayer = mainPlayerGO.GetComponent<Characters.CharacterController>();
+				mainPlayer = MainPlayerGO.GetComponent<Characters.CharacterController>();
 			
 			return mainPlayer;
 		}
@@ -43,7 +56,7 @@ public class GameManager
 	
 	public static void ApplyCommand(CommandChainType commandChain)
 	{			
-		MainPlayer.UseSkill(commandChain, MainPlayerGO.transform.position);
+		MainPlayer.ApplyCommand(commandChain, MainPlayerGO.transform.position);
 	}
 	
 	public static void ApplyAction(ActionType actionType, Vector3 characterPosition)
@@ -53,6 +66,6 @@ public class GameManager
 	
 	public static void ApplyCommand(CommandChainType commandChain, Vector3 characterPosition)
 	{
-		MainPlayer.UseSkill(commandChain, characterPosition);
+		MainPlayer.ApplyCommand(commandChain, characterPosition);
 	}
 }
